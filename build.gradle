@@ -1,0 +1,156 @@
+plugins {
+    id "java"
+    id "maven-publish"
+    id "eclipse"
+    id "org.springframework.boot" version "2.6.7"
+}
+
+apply plugin: "java"
+apply plugin: "io.spring.dependency-management"
+apply plugin: "eclipse"
+
+jar {
+    "employee-select-service:0.1.0"
+}
+
+bootJar {
+    exclude("gradle-api-*.jar", "groovy-*.jar")
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven { url = uri("https://repo.maven.apache.org/maven2/") }
+    maven { url = uri("https://jitpack.io") }
+}
+
+ext {
+    springBootVersion = "2.6.7"
+    olingoVersion = "2.0.12"
+    sapOdataVersion = "3.68.0"
+    lombokVersion = "1.18.24"
+    swaggerVersion = "3.0.0"
+    querydslVersion = "5.0.0"
+    build = "build"
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-maven-plugin:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter:${springBootVersion}",
+            "org.springframework.boot:spring-boot-devtools:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-data-jdbc:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-data-rest:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-jersey:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-parent:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-hateoas:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-web-services:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}",
+            "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}",
+
+//            "org.springframework.boot:spring-boot-starter-security:${springBootVersion}",
+//            "org.springframework.boot:spring-boot-starter-oauth2-client:${springBootVersion}",
+//            "org.springframework.boot:spring-boot-starter-oauth2-resource-server:${springBootVersion}",
+
+            "org.flywaydb:flyway-core:8.5.10",
+
+            "com.querydsl:querydsl-jpa:${querydslVersion}",
+            "com.querydsl:querydsl-apt:${querydslVersion}",
+            "com.google.guava:guava:31.1-jre",
+            "com.google.code.gson:gson:2.9.0",
+
+            "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.3",
+
+            //OLingo ODATA V2.0
+            implementation("org.apache.olingo:olingo-odata2-core:${olingoVersion}") {
+                exclude group: "javax.ws.rs", module: "javax.ws.rs-api"
+            },
+            implementation("org.apache.olingo:olingo-odata2-jpa-processor-core:${olingoVersion}") {
+                exclude group: "org.eclipse.persistence", module: "javax.persistence"
+                exclude group: "javax.ws.rs", module: "javax.ws.rs-api"
+            },
+            implementation("org.apache.olingo:olingo-odata2-annotation-processor-ref:${olingoVersion}") {
+                exclude group: "org.eclipse.persistence", module: "javax.persistence"
+                exclude group: "org.slf4j", module: "slf4j-log4j12"
+                exclude group: "javax.ws.rs", module: "javax.ws.rs-api"
+            },
+
+            //OLingo ODATA V4.0
+//            'org.apache.olingo:odata-commons-api:4.9.0',
+//            'org.apache.olingo:odata-commons-core:4.9.0',
+//            'org.apache.olingo:odata-server-core:4.9.0',
+//            'org.apache.olingo:odata-client-core:4.9.0',
+//            'org.apache.olingo:odata-server-api:4.9.0',
+//            'org.apache.olingo:odata-server-core-ext:4.9.0',
+//            'com.github.SAP:olingo-jpa-processor-v4:1.0.8',
+
+            //SAP SDK CLOUD(OData V4.0)
+            "com.sap.cloud.sdk.datamodel:odata-generator:${sapOdataVersion}",
+            "com.sap.cloud.sdk.datamodel:odata-v4-generator-maven-plugin:${sapOdataVersion}",
+            "com.sap.cloud.sdk.datamodel:odata-v4-core:${sapOdataVersion}",
+            "com.sap.cloud.sdk.archetypes:scp-cf-spring:${sapOdataVersion}",
+            "com.sap.cloud.sdk.cloudplatform:scp-cf:${sapOdataVersion}",
+            "com.sap.cloud.sdk:sdk-bom:${sapOdataVersion}",
+            "javax.inject:javax.inject",
+            "org.codehaus.mojo:build-helper-maven-plugin:3.3.0",
+
+            //Swagger
+            "io.springfox:springfox-swagger2:${swaggerVersion}",
+            "io.springfox:springfox-boot-starter:${swaggerVersion}",
+            "io.springfox:springfox-swagger-ui:${swaggerVersion}",
+
+            "org.projectlombok:lombok:${lombokVersion}",
+            "org.mapstruct:mapstruct:1.4.2.Final",
+            "org.projectlombok:lombok-mapstruct-binding:0.2.0"
+
+    runtimeOnly "org.springframework.boot:spring-boot-devtools:${springBootVersion}",
+            "org.postgresql:postgresql:42.3.4"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
+            "io.projectreactor:reactor-test:3.4.17",
+            "org.springframework.security:spring-security-test:5.6.3"
+
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}",
+            "org.mapstruct:mapstruct-processor:1.4.2.Final",
+            "com.querydsl:querydsl-apt:${querydslVersion}:general",
+            "org.springframework.boot:spring-boot-configuration-processor"
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+}
+
+configurations {
+//    implementation.exclude module: "slf4j-api"
+//    all*.exclude module : "spring-boot-starter-logging"
+//    all*.exclude module : "logback-classic"
+//    all*.exclude group: "org.slf4j"
+//    all*.exclude module: "slf4j-api"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/java'
+            srcDirs "${build}/vdm"
+        }
+    }
+}
+
+group = "com.service.select.employee"
+version = "0.0.1-SNAPSHOT"
+description = "employee-select-service"
+java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

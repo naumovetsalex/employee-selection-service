@@ -1,0 +1,15 @@
+package com.service.select.employee.config;
+
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestOperations;
+
+@Configuration
+public class SecurityConfig {
+
+    @Bean
+    public RestOperations rest(RestTemplateBuilder restTemplateBuilder) {
+        return restTemplateBuilder.basicAuthentication("alice", "").build();
+    }
+}

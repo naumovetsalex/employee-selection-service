@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/employees
+    driver-class-name: org.postgresql.Driver
+    username: admin
+    password: toor
+
+  flyway:
+    url: jdbc:postgresql://localhost:5432/employees
+    user: admin
+    password: toor
+    baseline-on-migrate: true
+    clean-disabled: true
+
+  file-system:
+    path-to-load: files/
+
+  sap-cloud-sdk:
+    odata:
+      v4:
+        input-directory-path: edmx/
+        output-directory-path: build/vdm/
+        service-name-mapping-file: serviceNameMappings.properties
+        package-name: com.service.select.employee.vdm
+        default-base-path: odata/v4/
+
+
+
+
+#  jersey:
+#    application-path: /odata
+
+#  autoconfigure:
+#    exclude: org.springframework.boot.autoconfigure.jersey.JerseyAutoConfiguration
+
+springfox:
+  documentation:
+    swagger:
+      v2:
+        host: http://localhost:8080/
+

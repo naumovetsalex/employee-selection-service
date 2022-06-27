@@ -1,0 +1,37 @@
+{
+  "groups": [
+    {
+      "name": "spring.sap-cloud-sdk.odata.v4",
+      "type": "com.service.select.employee.config.odata.sap.DataModelGeneratorProperties",
+      "sourceType": "com.service.select.employee.config.odata.sap.DataModelGeneratorProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.sap-cloud-sdk.odata.v4.default-base-path",
+      "type": "java.lang.String",
+      "sourceType": "com.service.select.employee.config.odata.sap.DataModelGeneratorProperties"
+    },
+    {
+      "name": "spring.sap-cloud-sdk.odata.v4.input-directory-path",
+      "type": "java.lang.String",
+      "sourceType": "com.service.select.employee.config.odata.sap.DataModelGeneratorProperties"
+    },
+    {
+      "name": "spring.sap-cloud-sdk.odata.v4.output-directory-path",
+      "type": "java.lang.String",
+      "sourceType": "com.service.select.employee.config.odata.sap.DataModelGeneratorProperties"
+    },
+    {
+      "name": "spring.sap-cloud-sdk.odata.v4.package-name",
+      "type": "java.lang.String",
+      "sourceType": "com.service.select.employee.config.odata.sap.DataModelGeneratorProperties"
+    },
+    {
+      "name": "spring.sap-cloud-sdk.odata.v4.service-name-mapping-file",
+      "type": "java.lang.String",
+      "sourceType": "com.service.select.employee.config.odata.sap.DataModelGeneratorProperties"
+    }
+  ],
+  "hints": []
+}
